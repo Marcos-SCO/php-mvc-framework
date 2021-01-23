@@ -14,7 +14,7 @@ $app = new Application();
 
 $app->get('/', 'home');
 
-$app->get('/contact', 'contact');
+$app->get('/contact', [SiteController::class, 'contact']);
 
 $app->post('/contact', [SiteController::class, 'handleContact']);
 
