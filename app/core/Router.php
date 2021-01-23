@@ -38,6 +38,11 @@ class Router
             return $this->renderView($callback);
         }
 
+        if (is_array($callback)) {
+            // Call only the instance
+            $callback[0] = new $callback[0]();
+        }
+
         return call_user_func($callback);
     }
 
