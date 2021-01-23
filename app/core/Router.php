@@ -30,7 +30,7 @@ class Router
 
         if (!$callback) {
             Response::setStatusCode(404);
-            return "Not founded...";
+            return $this->renderContent("Not founded...");
         }
 
         if (is_string($callback)) {
@@ -47,7 +47,14 @@ class Router
 
         return str_replace('{{content}}', $viewContent, $layoutContent);
     }
-
+    
+    protected function renderContent($viewContent)
+    {
+        $layoutContent = $this->layoutContent();        
+        
+        return str_replace('{{content}}', $viewContent, $layoutContent);
+    }
+    
     protected function layoutContent()
     {
         ob_start();
@@ -61,4 +68,5 @@ class Router
         include_once dirname(__DIR__) . '/views/' . $view . '.php';
         return ob_get_clean();
     }
+    
 }
