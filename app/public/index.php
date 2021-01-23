@@ -1,6 +1,7 @@
 <?php
 
 use App\Core\Application;
+use App\Controllers\SiteController;
 
 $dirname = dirname(__DIR__);
 
@@ -15,8 +16,6 @@ $app->get('/', 'home');
 
 $app->get('/contact', 'contact');
 
-$app->post('/contact', function() {
-    return "Handling submitted data";
-});
+$app->post('/contact', [SiteController::class, 'handleContact']);
 
 $app->run();
