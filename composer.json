@@ -1,0 +1,13 @@
+{
+    "name": "marcos/php_mvc_framework",
+    "authors": [{
+        "name": "Marcos-SCO",
+        "email": "marcos_sco@outlook.com"
+    }],
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "require": {}
+}
