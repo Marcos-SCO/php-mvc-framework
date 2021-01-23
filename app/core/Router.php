@@ -17,6 +17,11 @@ class Router
         $this->routes['get'][$path] = $callback;
     }
 
+    public function post($path, $callback)
+    {
+        $this->routes['post'][$path] = $callback;
+    }
+
     public function resolve()
     {
         $path = $this->request->getPath();
@@ -24,7 +29,8 @@ class Router
         $callback = $this->routes[$method][$path] ?? false;
 
         if (!$callback) {
-            return 'Not found...';
+            Response::setStatusCode(404);
+            return "Not founded...";
         }
 
         if (is_string($callback)) {
@@ -48,8 +54,9 @@ class Router
         include_once dirname(__DIR__) . '/views/layouts/main.php';
         return ob_get_clean();
     }
-    
-    protected function renderOnlyView($view) {
+
+    protected function renderOnlyView($view)
+    {
         ob_start();
         include_once dirname(__DIR__) . '/views/' . $view . '.php';
         return ob_get_clean();
