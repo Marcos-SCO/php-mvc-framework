@@ -8,6 +8,7 @@ class Request
     {
         // $path = $_SERVER['REQUEST_URI'] ?? '/';
         $path = $_SERVER['PATH_INFO'] ?? '/';
+        $path =  str_replace('/public', '', $path); 
         $position = strpos($path, '?');
 
         if (!$position) {
