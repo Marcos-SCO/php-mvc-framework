@@ -40,7 +40,8 @@ class Router
 
         if (is_array($callback)) {
             // Call only the instance
-            $callback[0] = new $callback[0]();
+            // $callback[0] = new $callback[0]();
+            $callback[0] = Application::$app->controller = new $callback[0]();
         }
 
         return call_user_func($callback, $this->request);
@@ -63,8 +64,10 @@ class Router
 
     protected function layoutContent()
     {
+        $layout = Application::$app->controller->layout;
+
         ob_start();
-        include_once dirname(__DIR__) . '/views/layouts/main.php';
+        include_once dirname(__DIR__) . '/views/layouts/'.$layout.'.php';
         return ob_get_clean();
     }
 

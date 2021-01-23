@@ -7,6 +7,7 @@ class Application
     public Router $router;
     public Request $request;
     public static Application $app;
+    public Controller $controller;
     
     public function __construct()
     {
@@ -30,5 +31,25 @@ class Application
     public function run()
     {
         echo $this->router->resolve();
+    }
+
+    /**
+     * Get the value of controller
+     */ 
+    public function getController()
+    {
+        return $this->controller;
+    }
+
+    /**
+     * Set the value of controller
+     *
+     * @return  self
+     */ 
+    public function setController($controller)
+    {
+        $this->controller = $controller;
+
+        return $this;
     }
 }

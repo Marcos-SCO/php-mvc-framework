@@ -29,6 +29,14 @@
                         <a class="nav-link" href="<?= $_ENV['BASE'] ?>/contact">Contact</a>
                     </li>
                 </ul>
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="<?= $_ENV['BASE'] ?>/login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= $_ENV['BASE'] ?>/register">Register</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
