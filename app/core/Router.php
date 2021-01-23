@@ -30,7 +30,8 @@ class Router
 
         if (!$callback) {
             Response::setStatusCode(404);
-            return $this->renderContent("Not founded...");
+            // return $this->renderContent("Not founded...");
+            return $this->renderView('_404');
         }
 
         if (is_string($callback)) {
