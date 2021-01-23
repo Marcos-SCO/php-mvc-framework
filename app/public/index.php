@@ -15,4 +15,8 @@ $app->get('/', 'home');
 
 $app->get('/contact', 'contact');
 
+$app->post('/contact', function() {
+    return "Handling submitted data";
+});
+
 $app->run();

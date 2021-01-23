@@ -20,6 +20,10 @@ class Application
     public function get($path, $callback) {
         $this->router->get($path,$callback);
     }
+    
+    public function post($path, $callback) {
+        $this->router->post($path,$callback);
+    }
 
     public function run()
     {
