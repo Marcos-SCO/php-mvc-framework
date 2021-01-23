@@ -10,4 +10,6 @@ $app->get('/', function() {
     return 'Hello World';
 });
 
+$app->get('/contact', 'contact');
+
 $app->run();
