@@ -12,7 +12,7 @@ $dotenv->load();
 
 $app = new Application();
 
-$app->get('/', 'home');
+$app->get('/', [SiteController::class, 'home']);
 
 $app->get('/contact', [SiteController::class, 'contact']);
 

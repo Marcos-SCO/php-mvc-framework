@@ -23,8 +23,8 @@ class Application
         $this->router->post($path,$callback);
     }
     
-    public function renderView($view) {
-        return $this->router->renderView($view);
+    public function renderView($view, $params = []) {
+        return $this->router->renderView($view, $params);
     }
     
     public function run()
