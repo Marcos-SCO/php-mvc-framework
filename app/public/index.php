@@ -2,13 +2,16 @@
 
 use App\Core\Application;
 
-require_once dirname(__DIR__) . "/vendor/autoload.php";
+$dirname = dirname(__DIR__);
+
+require_once $dirname . "/vendor/autoload.php";
+
+$dotenv = Dotenv\Dotenv::createImmutable($dirname, '.env');
+$dotenv->load();
 
 $app = new Application();
 
-$app->get('/', function() {
-    return 'Hello World';
-});
+$app->get('/', 'home');
 
 $app->get('/contact', 'contact');
 
