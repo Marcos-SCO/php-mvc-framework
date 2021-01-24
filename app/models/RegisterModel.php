@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Models;
 
@@ -12,4 +12,9 @@ class RegisterModel extends Model
     public string $email;
     public string $password;
     public string $password_confirm;
+
+    public function register()
+    {
+        return 'Creating a new user';
+    }
 }
