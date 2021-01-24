@@ -21,7 +21,19 @@ class RegisterModel extends Model
     public function rules(): array
     {
         return [
-
+            'first_name' => [self::RULE_REQUIRED],
+            'last_name' => [self::RULE_REQUIRED],
+            'email' => [self::RULE_REQUIRED, self::RULE_EMAIL],
+            'password' => [
+                self::RULE_REQUIRED, [
+                    self::RULE_MIN, 'min' => 6
+                ], [
+                    self::RULE_MAX, 'max' => 24
+                ]
+            ],
+            'password_confirm' => [self::RULE_REQUIRED, [
+                self::RULE_MATCH, 'match' => 'password'
+            ]],
         ];
     }
 }
