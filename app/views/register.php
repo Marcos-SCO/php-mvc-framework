@@ -25,7 +25,7 @@
     </div>
     <div class="mb-3">
         <label for="confirm_password" class="form-label">Confirm Password</label>
-        <textarea type="password" class="form-control" name="confirm_password" id="confirm_password" aria-describedby="confirm_password"></textarea>
+        <textarea type="password" class="form-control" name="password_confirm" id="password_confirm" aria-describedby="password_confirm"></textarea>
     </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>
