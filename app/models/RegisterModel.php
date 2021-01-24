@@ -17,4 +17,11 @@ class RegisterModel extends Model
     {
         return 'Creating a new user';
     }
+
+    public function rules(): array
+    {
+        return [
+
+        ];
+    }
 }

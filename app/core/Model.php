@@ -14,6 +14,8 @@ abstract class Model
         }
     }
 
+    abstract public function rules(): array;
+
     public function validate()
     {
     }
