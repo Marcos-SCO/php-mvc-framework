@@ -24,6 +24,8 @@ class AuthController extends Controller
                 return 'Success';
             }
 
+            // var_dump($registerModel->errors);
+
             return $this->render('register', [
                 'model' => $registerModel
             ]);
