@@ -4,6 +4,12 @@ namespace App\Core;
 
 abstract class Model
 {
+    public const RULE_REQUIRED = 'required';
+    public const RULE_EMAIL = 'email';
+    public const RULE_MIN = 'min';
+    public const RULE_MAX = 'max';
+    public const RULE_MATCH = 'match';
+
     public function loadData($data)
     {
         foreach ($data as $key => $value) {
@@ -18,5 +24,6 @@ abstract class Model
 
     public function validate()
     {
+        
     }
 }
