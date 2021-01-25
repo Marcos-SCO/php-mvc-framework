@@ -11,9 +11,9 @@
     </div>
 </div>
 
-<?= $form->field($model, 'email', 'email') ?>
-<?= $form->field($model, 'password', 'password') ?>
-<?= $form->field($model, 'password_confirm', 'password') ?>
+<?= $form->field($model, 'email')->emailField() ?>
+<?= $form->field($model, 'password')->passwordField() ?>
+<?= $form->field($model, 'password_confirm')->passwordField() ?>
 
 <button type="submit" class="btn btn-primary">Submit</button>
 
