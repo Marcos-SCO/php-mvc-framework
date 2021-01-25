@@ -14,4 +14,25 @@ class Field
         $this->model = $model;
         $this->attribute = $attribute;
     }
+
+    public function __toString()
+    {
+        return sprintf(
+            '
+            <div class="mb-3">
+                <label for="%s" class="form-label">%s</label>
+                <input type="text" name="%s" id="%s" aria-describedby="%s" value="%s" class="form-control%s">
+                <div class="invalid-feedback">%s</div>
+            </div>
+        ',
+            $this->attribute,
+            ucfirst(str_replace('_', ' ', $this->attribute)),
+            $this->attribute,
+            $this->attribute,
+            $this->attribute,
+            $this->model->{$this->attribute},
+            $this->model->hasError($this->attribute) ? ' is-invalid ' : '',
+            $this->model->getFirstError($this->attribute),
+        );
+    }
 }
