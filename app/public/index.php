@@ -11,7 +11,15 @@ require_once $dirname . "/vendor/autoload.php";
 $dotenv = Dotenv\Dotenv::createImmutable($dirname, '.env');
 $dotenv->load();
 
-$app = new Application();
+$config = [
+    'db' => [
+        'dsn' => $_ENV['DB_DSN'],
+        'user' => $_ENV['DB_USER'],
+        'password' => $_ENV['DB_PASSWORD'],
+    ],
+];
+
+$app = new Application(dirname(__DIR__),$config['db']);
 
 $app->get('/', [SiteController::class, 'home']);
 

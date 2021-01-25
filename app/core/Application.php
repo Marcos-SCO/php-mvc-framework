@@ -8,11 +8,13 @@ class Application
     public Request $request;
     public Database $db;
     public static Application $app;
+    public static $ROOT_DIR;
     public Controller $controller;
 
-    public function __construct(array $config = [])
+    public function __construct($rootPath, array $config = [])
     {
         self::$app = $this;
+        self::$ROOT_DIR = $rootPath;
         $this->request = new Request();
         $this->router = new Router($this->request);
 
