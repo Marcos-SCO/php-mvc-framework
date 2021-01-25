@@ -8,11 +8,13 @@ class Field
 {
     public Model $model;
     public string $attribute;
+    public string $type;
 
-    public function __construct(Model $model, string $attribute)
+    public function __construct(Model $model, string $attribute, string $type)
     {
         $this->model = $model;
         $this->attribute = $attribute;
+        $this->type = $type;
     }
 
     public function __toString()
@@ -21,12 +23,13 @@ class Field
             '
             <div class="mb-3">
                 <label for="%s" class="form-label">%s</label>
-                <input type="text" name="%s" id="%s" aria-describedby="%s" value="%s" class="form-control%s">
+                <input type="%s" name="%s" id="%s" aria-describedby="%s" value="%s" class="form-control%s">
                 <div class="invalid-feedback">%s</div>
             </div>
         ',
             $this->attribute,
             ucfirst(str_replace('_', ' ', $this->attribute)),
+            $this->type,
             $this->attribute,
             $this->attribute,
             $this->attribute,

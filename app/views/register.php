@@ -2,8 +2,6 @@
 
 <?php $form = \App\Core\Form\Form::begin($_ENV['BASE'] . '/register', 'post') ?>
 
-
-
 <div class="row">
     <div class="col">
         <?= $form->field($model, 'first_name') ?>
@@ -12,9 +10,10 @@
         <?= $form->field($model, 'last_name') ?>
     </div>
 </div>
-<?= $form->field($model, 'email') ?>
-<?= $form->field($model, 'password') ?>
-<?= $form->field($model, 'password_confirm') ?>
+
+<?= $form->field($model, 'email', 'email') ?>
+<?= $form->field($model, 'password', 'password') ?>
+<?= $form->field($model, 'password_confirm', 'password') ?>
 
 <button type="submit" class="btn btn-primary">Submit</button>
 
