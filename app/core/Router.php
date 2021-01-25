@@ -67,7 +67,7 @@ class Router
         $layout = Application::$app->controller->layout;
 
         ob_start();
-        include_once dirname(__DIR__) . '/views/layouts/'.$layout.'.php';
+        include_once Application::$ROOT_DIR . '/views/layouts/'.$layout.'.php';
         return ob_get_clean();
     }
 
@@ -79,7 +79,7 @@ class Router
         }
 
         ob_start();
-        include_once dirname(__DIR__) . '/views/' . $view . '.php';
+        include_once Application::$ROOT_DIR . '/views/' . $view . '.php';
         return ob_get_clean();
     }
 }
