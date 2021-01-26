@@ -29,11 +29,13 @@ class Application
 
         if ($this->allParamsForConnection($config['db'])) {
             $this->db = new Database($config['db']);
-        
+
             $primaryValue = $this->session->get('user');
-            if($primaryValue) {
+            if ($primaryValue) {
                 $primaryKey = $this->userClass::primaryKey();
                 $this->user = $this->userClass::findOne([$primaryKey => $primaryValue]);
+            } else {
+                $this->user = null;
             }
         }
     }
@@ -66,6 +68,11 @@ class Application
         echo $this->router->resolve();
     }
 
+    public static function isGuest()
+    {
+        return !self::$app->user;
+    }
+
     public function redirect(string $path)
     {
         $this->response->redirect($path);
@@ -96,9 +103,15 @@ class Application
         $this->user = $user;
         $primaryKey = $user->primaryKey();
         $primaryValue = $user->{$primaryKey};
-        $this->session->set('User', $primaryValue);
+        $this->session->set('user', $primaryValue);
+        return true;
     }
-    
+
+    public function getDisplayName()
+    {
+        return $this->user->getDisplayName();
+    }
+
     public function logout()
     {
         $this->user = null;
