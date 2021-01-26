@@ -9,6 +9,7 @@ abstract class Model
     public const RULE_MIN = 'min';
     public const RULE_MAX = 'max';
     public const RULE_MATCH = 'match';
+    public const RULE_UNIQUE = 'unique';
 
     public array $errors = [];
 
@@ -48,10 +49,45 @@ abstract class Model
                 if ($ruleName === self::RULE_MATCH && $value !== $this->{$rule['match']}) {
                     $this->addError($attribute, self::RULE_MATCH, $rule);
                 }
+                if ($ruleName === self::RULE_UNIQUE) {
+                    $className = $rule['class'];
+                    $uniqueAttribute = $rule['attribute'] ?? $attribute;
+                    $tableName = $className::tableName();
+                    
+                    $stmt = Application::$app->db->prepare("SELECT * FROM {$tableName} WHERE {$uniqueAttribute} = :{$uniqueAttribute}");
+
+                    self::bind($stmt,":{$uniqueAttribute}", $value);
+
+                    $stmt->execute();
+                    $record = $stmt->fetchObject();
+                    if ($record) {
+                        $this->addError($attribute, self::RULE_UNIQUE, ['field' => $attribute]);
+                    }
+                }
             }
         }
 
         return empty($this->errors);
+    }
+
+    public static function bind($stmt, $param, $value, $type = null)
+    {
+        if (is_null($type)) {
+            switch ($value) {
+                case is_int($value):
+                    $type = \PDO::PARAM_INT;
+                    break;
+                case is_bool($value):
+                    $type = \PDO::PARAM_BOOL;
+                    break;
+                case is_null($value):
+                    $type = \PDO::PARAM_NULL;
+                    break;
+                default:
+                    $type = \PDO::PARAM_STR;
+            }
+        }
+        return $stmt->bindValue($param, $value, $type);
     }
 
     public function addError(string $attribute, string $rule, $params = [])
@@ -72,6 +108,7 @@ abstract class Model
             self::RULE_MIN => 'Tamanho minimo do campo deve ser de {min}',
             self::RULE_MAX => 'Tamanho máximo do campo deve ser de {min}',
             self::RULE_MATCH => 'Esse campo deve ter o mesmo valor de {match}',
+            self::RULE_UNIQUE => 'Já existe um registro com esse {field}',
         ];
     }
 
