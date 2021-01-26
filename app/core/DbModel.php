@@ -17,8 +17,11 @@ abstract class DbModel extends Model
 
         foreach ($attributes as $attribute) {
             // $stmt->bindValue("{:$attribute}", $this->{$attribute});
-            self::bind($stmt, "{:$attribute}", $this->{$attribute});
+            self::bind($stmt, ":$attribute", $this->{$attribute});
         }
+
+        $stmt->execute();
+        return true;
     }
 
     public static function prepare($sql)
