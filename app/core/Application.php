@@ -6,6 +6,7 @@ class Application
 {
     public Router $router;
     public Request $request;
+    public Response $response;
     public Database $db;
     public static Application $app;
     public static $ROOT_DIR;
@@ -16,6 +17,7 @@ class Application
         self::$app = $this;
         self::$ROOT_DIR = $rootPath;
         $this->request = new Request();
+        $this->response = new Response();
         $this->router = new Router($this->request);
 
         if ($this->allParamsForConnection($config)) {
@@ -49,6 +51,11 @@ class Application
     public function run()
     {
         echo $this->router->resolve();
+    }
+
+    public function redirect(string $path)
+    {
+        $this->response->redirect($path);
     }
 
     /**
