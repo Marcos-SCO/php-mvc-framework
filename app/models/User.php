@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use App\Core\DbModel;
+use App\Core\UserModel;
 
-class User extends DbModel
+class User extends UserModel
 {
     // user status
     const STATUS_INACTIVE = 0;
@@ -27,6 +27,11 @@ class User extends DbModel
     public function tableName(): string
     {
         return 'users';
+    }
+
+    public function getDisplayName(): string 
+    {
+        return $this->first_name . ' ' . $this->last_name;
     }
 
     public function save()
