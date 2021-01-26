@@ -27,8 +27,8 @@ class Application
         $this->session = new Session();
         $this->router = new Router($this->request, $this->response);
 
-        if ($this->allParamsForConnection($config)) {
-            $this->db = new Database($config);
+        if ($this->allParamsForConnection($config['db'])) {
+            $this->db = new Database($config['db']);
         
             $primaryValue = $this->session->get('user');
             if($primaryValue) {

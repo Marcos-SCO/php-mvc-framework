@@ -22,7 +22,7 @@ $config = [
 
 date_default_timezone_set('America/Sao_Paulo');
 
-$app = new Application(dirname(__DIR__), $config['db']);
+$app = new Application(dirname(__DIR__), $config);
 
 $app->get('/', [SiteController::class, 'home']);
 
