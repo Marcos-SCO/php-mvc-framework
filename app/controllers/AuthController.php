@@ -2,10 +2,10 @@
 
 namespace App\Controllers;
 
-use App\Core\Application;
-use App\Core\Controller;
-use App\Core\Request;
 use App\Models\User;
+use App\Core\Request;
+use App\Core\Controller;
+use App\Core\Application;
 
 class AuthController extends Controller
 {
@@ -22,6 +22,7 @@ class AuthController extends Controller
             $user->loadData($request->getBody());
 
             if ($user->validate() && $user->save()) {
+                Application::$app->session->setFlash('success', 'Usuário cadastrado com sucesso!');
                 Application::$app->redirect('/');
             }
 

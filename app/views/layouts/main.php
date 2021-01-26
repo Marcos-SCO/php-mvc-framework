@@ -1,3 +1,6 @@
+<?php
+
+use App\Core\Application; ?>
 <!doctype html>
 <html lang="en">
 
@@ -42,6 +45,14 @@
     </nav>
 
     <main class="container">
+
+        <?php if (Application::$app->session->getFlash('success')) :
+        ?>
+            <div class="alert alert-success">
+                <?= Application::$app->session->getFlash('success') ?>
+            </div>
+        <?php endif; ?>
+
         <!-- Dynamic content -->
         {{content}}
     </main>
