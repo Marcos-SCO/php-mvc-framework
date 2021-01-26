@@ -6,7 +6,7 @@ use \App\Models\User;
 
 <h1>Login</h1>
 
-<?php $form = Form::begin($_ENV['BASE'] . '/register', 'post') ?>
+<?php $form = Form::begin($_ENV['BASE'] . '/login', 'post') ?>
 
 <?= $form->field($model, 'email')->emailField() ?>
 <?= $form->field($model, 'password')->passwordField() ?>
