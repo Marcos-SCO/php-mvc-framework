@@ -7,6 +7,7 @@ class Application
     public Router $router;
     public Request $request;
     public Response $response;
+    public Session $session;
     public Database $db;
     public static Application $app;
     public static $ROOT_DIR;
@@ -18,6 +19,7 @@ class Application
         self::$ROOT_DIR = $rootPath;
         $this->request = new Request();
         $this->response = new Response();
+        $this->session = new Session();
         $this->router = new Router($this->request);
 
         if ($this->allParamsForConnection($config)) {
