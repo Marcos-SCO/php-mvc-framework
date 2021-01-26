@@ -4,19 +4,24 @@ namespace App\Core;
 
 class Application
 {
+    public static $ROOT_DIR;
+
+    public string $userClass;
     public Router $router;
     public Request $request;
     public Response $response;
     public Session $session;
     public Database $db;
+    public ?DbModel $user;
+
     public static Application $app;
-    public static $ROOT_DIR;
     public Controller $controller;
 
     public function __construct($rootPath, array $config = [])
     {
-        self::$app = $this;
+        $this->userClass = $config['userClass'];
         self::$ROOT_DIR = $rootPath;
+        self::$app = $this;
         $this->request = new Request();
         $this->response = new Response();
         $this->session = new Session();
@@ -24,6 +29,12 @@ class Application
 
         if ($this->allParamsForConnection($config)) {
             $this->db = new Database($config);
+        
+            $primaryValue = $this->session->get('user');
+            if($primaryValue) {
+                $primaryKey = $this->userClass::primaryKey();
+                $this->user = $this->userClass::findOne([$primaryKey => $primaryValue]);
+            }
         }
     }
 
@@ -78,5 +89,13 @@ class Application
         $this->controller = $controller;
 
         return $this;
+    }
+
+    public function login(DbModel $user)
+    {
+        $this->user = $user;
+        $primaryKey = $user->primaryKey();
+        $primaryValue = $user->{$primaryKey};
+        $this->session->set('User', $primaryValue);
     }
 }
