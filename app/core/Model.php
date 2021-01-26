@@ -25,6 +25,16 @@ abstract class Model
 
     abstract public function rules(): array;
 
+    public function labels(): array
+    {
+        return [];
+    }
+
+    public function getLabel($attribute, $key = 'label') {
+        return $this->labels()[$key][$attribute] ?? str_replace('_', ' ', $attribute);
+    }
+
+
     public function validate()
     {
         foreach ($this->rules() as $attribute => $rules) {
@@ -53,15 +63,15 @@ abstract class Model
                     $className = $rule['class'];
                     $uniqueAttribute = $rule['attribute'] ?? $attribute;
                     $tableName = $className::tableName();
-                    
+
                     $stmt = Application::$app->db->prepare("SELECT * FROM {$tableName} WHERE {$uniqueAttribute} = :{$uniqueAttribute}");
 
-                    self::bind($stmt,":{$uniqueAttribute}", $value);
+                    self::bind($stmt, ":{$uniqueAttribute}", $value);
 
                     $stmt->execute();
                     $record = $stmt->fetchObject();
                     if ($record) {
-                        $this->addError($attribute, self::RULE_UNIQUE, ['field' => $attribute]);
+                        $this->addError($attribute, self::RULE_UNIQUE, ['field' => $this->getLabel($attribute, 'error')]);
                     }
                 }
             }
@@ -94,7 +104,7 @@ abstract class Model
     {
         $message = $this->errorMessages()[$rule] ?? '';
         foreach ($params as $key => $value) {
-            $message = str_replace("{{$key}}", $value, $message);
+            $message = str_replace("{{$key}}", $this->getLabel($value, 'error'), $message);
         }
 
         $this->errors[$attribute][] = $message;
@@ -105,8 +115,8 @@ abstract class Model
         return [
             self::RULE_REQUIRED => 'Esse campo é requirido',
             self::RULE_EMAIL => 'Esse campo deve ter um e-mail válido',
-            self::RULE_MIN => 'Tamanho minimo do campo deve ser de {min}',
-            self::RULE_MAX => 'Tamanho máximo do campo deve ser de {min}',
+            self::RULE_MIN => 'Tamanho minimo do campo deve ser de {min} caracteres',
+            self::RULE_MAX => 'Tamanho máximo do campo deve ser de {min} caracteres',
             self::RULE_MATCH => 'Esse campo deve ter o mesmo valor de {match}',
             self::RULE_UNIQUE => 'Já existe um registro com esse {field}',
         ];

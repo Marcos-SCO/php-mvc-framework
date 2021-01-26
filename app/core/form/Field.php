@@ -33,7 +33,7 @@ class Field
             </div>
         ',
             $this->attribute,
-            ucfirst(str_replace('_', ' ', $this->attribute)),
+            $this->model->getLabel($this->attribute),
             $this->type,
             $this->attribute,
             $this->attribute,
