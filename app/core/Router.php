@@ -5,11 +5,13 @@ namespace App\Core;
 class Router
 {
     public Request $request;
+    public Response $response;
     protected array $routes = [];
 
-    public function __construct(Request $request)
+    public function __construct(Request $request, Response $response)
     {
         $this->request = $request;
+        $this->response = $response;
     }
 
     public function get($path, $callback)
@@ -44,7 +46,7 @@ class Router
             $callback[0] = Application::$app->controller = new $callback[0]();
         }
 
-        return call_user_func($callback, $this->request);
+        return call_user_func($callback, $this->request, $this->response);
     }
 
     public function renderView($view, $params = [])
