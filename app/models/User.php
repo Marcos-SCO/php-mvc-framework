@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Core\DbModel;
-use App\Core\Model;
 
 class User extends DbModel
 {
@@ -14,9 +13,14 @@ class User extends DbModel
     public string $password;
     public string $password_confirm;
 
+    public function tableName(): string
+    {
+        return 'users';
+    }
+
     public function register()
     {
-        return 'Creating a new user';
+        return $this->save();
     }
 
     public function rules(): array
@@ -36,5 +40,10 @@ class User extends DbModel
                 self::RULE_MATCH, 'match' => 'password'
             ]],
         ];
+    }
+
+    public function attributes(): array
+    {
+        return ['first_name', 'last_name', 'email', 'password'];
     }
 }
