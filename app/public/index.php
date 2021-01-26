@@ -36,4 +36,6 @@ $app->post('/login', [AuthController::class, 'login']);
 $app->get('/register', [AuthController::class, 'register']);
 $app->post('/register', [AuthController::class, 'register']);
 
+$app->post('/logout', [AuthController::class, 'logout']);
+
 $app->run();
