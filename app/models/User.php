@@ -6,10 +6,16 @@ use App\Core\DbModel;
 
 class User extends DbModel
 {
+    // user status
+    const STATUS_INACTIVE = 0;
+    const STATUS_ACTIVE = 1;
+    const STATUS_DELETED = 2;
+
     // Properties to validate
     public string $first_name;
     public string $last_name;
     public string $email;
+    public int $status = self::STATUS_INACTIVE;
     public string $password;
     public string $password_confirm;
 
@@ -20,8 +26,9 @@ class User extends DbModel
 
     public function save()
     {
+        $this->status = self::STATUS_DELETED;
         $this->password = password_hash($this->password, PASSWORD_DEFAULT);
-        
+
         return parent::save();
     }
 
@@ -46,6 +53,6 @@ class User extends DbModel
 
     public function attributes(): array
     {
-        return ['first_name', 'last_name', 'email', 'password'];
+        return ['first_name', 'last_name', 'email', 'password', 'status'];
     }
 }
