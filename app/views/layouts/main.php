@@ -1,6 +1,9 @@
 <?php
 
-use App\Core\Application; ?>
+use App\Core\Application;
+use App\Core\Form\Form;
+
+?>
 <!doctype html>
 <html lang="en">
 
@@ -42,11 +45,16 @@ use App\Core\Application; ?>
                         </li>
                     </ul>
                 <?php else : ?>
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="<?= $_ENV['BASE'] ?>/logout">Olá <?= Application::$app->getDisplayName() ?>
-                                 (Logout)
-                            </a>
+                    <ul class="navbar-nav me-auto login-ul">
+                        <li class="nav-item">Olá <?= Application::$app->getDisplayName() ?>
+                            <style>
+                                .login-ul form {
+                                    display: inline;
+                                }
+                            </style>
+                            <?php Form::begin($_ENV['BASE'] . '/logout', 'post') ?>
+                            <button type="submit" style="    border: none;background: none;display: inline;padding: 0">( Logout )</button>
+                            <?php Form::end(); ?>
                         </li>
                     </ul>
                 <?php endif; ?>
