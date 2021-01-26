@@ -18,7 +18,7 @@ class User extends DbModel
         return 'users';
     }
 
-    public function register()
+    public function save()
     {
         return $this->save();
     }
