@@ -24,6 +24,20 @@ abstract class DbModel extends Model
         return true;
     }
 
+    public function findOne($where)
+    {
+        $tableName = static::tableName();
+        $attributes = array_keys($where);
+        $sql = implode('AND ', array_map(fn ($attr) => "$attr = :$attr", $attributes));
+        $stmt = self::prepare("SELECT * FROM {$tableName} WHERE {$sql}");
+        foreach ($where as $key => $value) {
+            self::bind($stmt, ":{$key}", $value);
+        }
+
+        $stmt->execute();
+        return $stmt->fetchObject(static::class);
+    }
+
     public static function prepare($sql)
     {
         return Application::$app->db->pdo->prepare($sql);
