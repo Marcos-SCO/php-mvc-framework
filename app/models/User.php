@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use App\Core\DbModel;
 use App\Core\Model;
 
-class RegisterModel extends Model
+class User extends DbModel
 {
     // Properties to validate
     public string $first_name;
