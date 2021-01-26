@@ -1,18 +1,16 @@
-<h1>Login in your account</h1>
+<?php
 
-<form action="<?=$_ENV['BASE']?>/login" method="post">
-    <div class="mb-3">
-        <label for="subject" class="form-label">Subject</label>
-        <input type="text" class="form-control" name="subject" id="subject" aria-describedby="subject">
-    </div>
-    <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
-        <input type="text" class="form-control" name="email" id="email" aria-describedby="email">
-    </div>
-    <div class="mb-3">
-        <label for="body" class="form-label">Body</label>
-        <textarea type="text" class="form-control" name="body" id="body" aria-describedby="body"></textarea>
-    </div>
+use \App\Core\Form\Form;
+use \App\Models\User;
+?>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+<h1>Login</h1>
+
+<?php $form = Form::begin($_ENV['BASE'] . '/register', 'post') ?>
+
+<?= $form->field($model, 'email')->emailField() ?>
+<?= $form->field($model, 'password')->passwordField() ?>
+
+<button type="submit" class="btn btn-primary">Submit</button>
+
+<?= Form::end() ?>
