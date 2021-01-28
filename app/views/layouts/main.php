@@ -45,15 +45,11 @@ use App\Core\Form\Form;
                         </li>
                     </ul>
                 <?php else : ?>
-                    <ul class="navbar-nav me-auto login-ul">
-                        <li class="nav-item">Olá <?= Application::$app->getDisplayName() ?>
-                            <style>
-                                .login-ul form {
-                                    display: inline;
-                                }
-                            </style>
-                            <?php Form::begin($_ENV['BASE'] . '/logout', 'post') ?>
-                            <button type="submit" style="    border: none;background: none;display: inline;padding: 0">( Logout )</button>
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a href="<?= $_ENV['BASE'] ?>/profile" class="nav-link"><?= Application::$app->getDisplayName() ?> | Perfil</a></li>
+                        <li class="nav-item">
+                            <?php Form::begin($_ENV['BASE'] . '/logout', 'post', 'nav-link') ?>
+                            <button type="submit" style="border: none;background: none;display: inline;padding: 0">( Logout )</button>
                             <?php Form::end(); ?>
                         </li>
                     </ul>
