@@ -1,3 +1,9 @@
+<?php
+
+use App\Core\Application;
+use App\Core\Form\Form;
+
+?>
 <!doctype html>
 <html lang="en">
 
@@ -13,6 +19,44 @@
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="<?= $_ENV['BASE'] ?>">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= $_ENV['BASE'] ?>/contact">Contact</a>
+                    </li>
+                </ul>
+                <?php if (Application::isGuest()) : ?>
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="<?= $_ENV['BASE'] ?>/login">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= $_ENV['BASE'] ?>/register">Register</a>
+                        </li>
+                    </ul>
+                <?php else : ?>
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a href="<?= $_ENV['BASE'] ?>/profile" class="nav-link"><?= App::$app->getDisplayName() ?> | Perfil</a></li>
+                        <li class="nav-item">
+                            <?php Form::begin($_ENV['BASE'] . '/logout', 'post', 'nav-link') ?>
+                            <button type="submit" style="border: none;background: none;display: inline;padding: 0">( Logout )</button>
+                            <?php Form::end(); ?>
+                        </li>
+                    </ul>
+                <?php endif; ?>
+            </div>
+        </div>
+    </nav>
+
 
     <main class="container">
         <!-- Dynamic content -->
