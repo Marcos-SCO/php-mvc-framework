@@ -31,6 +31,11 @@ class User extends UserModel
 
     public function getDisplayName(): string 
     {
+        return $this->first_name;
+    }
+    
+    public function getFullName(): string 
+    {
         return $this->first_name . ' ' . $this->last_name;
     }
 
