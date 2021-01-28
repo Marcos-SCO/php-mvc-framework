@@ -11,6 +11,7 @@ class Response
 
     public function redirect(string $path)
     {
+        $path = ltrim($path,'/');
         header('Location: ' . $_ENV['BASE'] . '/' . $path);
     }
 }
