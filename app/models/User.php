@@ -12,12 +12,12 @@ class User extends UserModel
     const STATUS_DELETED = 2;
 
     // Properties to validate
-    public string $first_name;
-    public string $last_name;
-    public string $email;
+    public string $first_name = '';
+    public string $last_name = '';
+    public string $email = '';
     public int $status = self::STATUS_INACTIVE;
-    public string $password;
-    public string $password_confirm;
+    public string $password = '';
+    public string $password_confirm = '';
 
     public function primaryKey(): string
     {
