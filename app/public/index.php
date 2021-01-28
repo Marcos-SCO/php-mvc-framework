@@ -37,5 +37,6 @@ $app->get('/register', [AuthController::class, 'register']);
 $app->post('/register', [AuthController::class, 'register']);
 
 $app->post('/logout', [AuthController::class, 'logout']);
+$app->get('/profile', [AuthController::class, 'profile']);
 
 $app->run();
