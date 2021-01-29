@@ -2,6 +2,9 @@
 
 use \App\Core\Form\Form;
 use \App\Models\User;
+
+/*** @var $this \App\Core\View */
+$this->title = 'Login';
 ?>
 
 <h1>Login</h1>

@@ -1,3 +1,8 @@
+<?php
+
+/*** @var $this \App\Core\View */
+$this->title = 'Register';
+?>
 <h1>Create an account</h1>
 
 <?php $form = \App\Core\Form\Form::begin($_ENV['BASE'] . '/register', 'post') ?>

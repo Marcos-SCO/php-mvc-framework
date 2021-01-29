@@ -1,6 +1,11 @@
+<?php
+
+/*** @var $this \App\Core\View */
+$this->title = 'Contact';
+?>
 <h1>Contact us</h1>
 
-<form action="<?=$_ENV['BASE']?>/contact" method="post">
+<form action="<?= $_ENV['BASE'] ?>/contact" method="post">
     <div class="mb-3">
         <label for="subject" class="form-label">Subject</label>
         <input type="text" class="form-control" name="subject" id="subject" aria-describedby="subject">
