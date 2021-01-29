@@ -14,6 +14,7 @@ class Application
     public Session $session;
     public Database $db;
     public ?DbModel $user;
+    public View $view;
 
     public static Application $app;
     public ?Controller $controller = null;
@@ -27,7 +28,8 @@ class Application
         $this->response = new Response();
         $this->session = new Session();
         $this->router = new Router($this->request, $this->response);
-
+        $this->view = new View();
+        
         if ($this->allParamsForConnection($config['db'])) {
             $this->db = new Database($config['db']);
 
@@ -61,7 +63,7 @@ class Application
 
     public function renderView($view, $params = [])
     {
-        return $this->router->renderView($view, $params);
+        return $this->view->renderView($view, $params);
     }
 
     public function run()
@@ -70,7 +72,7 @@ class Application
             echo $this->router->resolve();
         } catch (\Exception $e) {
             Response::setStatusCode($e->getCode());
-            echo $this->router->renderView('_error', [
+            echo $this->view->renderView('_error', [
                 'exception' => $e
             ]);
         }
